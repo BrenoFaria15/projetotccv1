@@ -1,4 +1,4 @@
-package com.projeto.tccv1.model.entity;
+package com.projeto.tccv1.model.enums;
 
 public enum TipoUsuario {
 

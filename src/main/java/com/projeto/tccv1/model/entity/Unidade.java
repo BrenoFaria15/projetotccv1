@@ -17,7 +17,6 @@ import lombok.Data;
 public class Unidade {
 	
 
-/*Unidades[{id_unidade,cnes,nome,logradouro,numero,complemento,cep,bairro,municipio,telefone}] */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id_unidade;
