@@ -8,5 +8,5 @@ import com.projeto.tccv1.model.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
 	
-	boolean existByEmail(String email);
+	boolean existByusuario(String usuario);
 }
