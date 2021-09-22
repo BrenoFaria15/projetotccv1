@@ -26,8 +26,8 @@ public class Usuario {
 	private long id_usuario;
 	
 	
-	@Column(unique = true,name = "usuario",nullable = false)
-	private String usuario;
+	@Column(unique = true,name = "nome_usuario",nullable = false)
+	private String nome;
 	
 	@Column(name = "senha",nullable = false)
 	private String senha;
