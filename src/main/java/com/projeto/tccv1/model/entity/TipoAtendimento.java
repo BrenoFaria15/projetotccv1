@@ -25,7 +25,7 @@ public class TipoAtendimento {
 	private long id_tipo_atendimento;
 
 	@Column(unique = true,name = "tipo_nome",nullable = false)
-	private String TipoNome;
+	private String tipoNome;
 	
 	@Column(name = "descricao")
 	private String Descricao;

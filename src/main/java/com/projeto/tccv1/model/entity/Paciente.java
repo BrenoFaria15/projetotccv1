@@ -78,7 +78,7 @@ FLG_Obito,data_obito,certidão de obito, convenio,sexo}]*/
 	private Date data_obito;
 	
 	@Column(name = "convenio")
-	private Date convenio;
+	private String convenio;
 	
 	
 
