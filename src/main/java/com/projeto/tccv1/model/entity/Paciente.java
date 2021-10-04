@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -65,6 +69,8 @@ FLG_Obito,data_obito,certidão de obito, convenio,sexo}]*/
 	@Column(name = "municipio")
 	private String municipio;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	@Column(name = "data_nascimento",nullable = false)
 	private Date data_nascimento;
 	
@@ -74,6 +80,8 @@ FLG_Obito,data_obito,certidão de obito, convenio,sexo}]*/
 	@Column(name = "flg_obito")
 	private boolean flg_obito;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	@Column(name = "data_obito")
 	private Date data_obito;
 	
