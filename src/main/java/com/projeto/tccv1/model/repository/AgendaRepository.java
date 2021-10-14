@@ -6,5 +6,6 @@ import com.projeto.tccv1.model.entity.Agenda;
 
 
 public interface AgendaRepository extends JpaRepository<Agenda,Long>{
+	
 
 }

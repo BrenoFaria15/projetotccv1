@@ -1,5 +1,7 @@
 package com.projeto.tccv1.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.projeto.tccv1.exeception.RegraNegocioException;
@@ -31,6 +33,12 @@ private UnidadeRepository repository;
 			throw new RegraNegocioException("Ja existe uma unidade com esse cnes cadastrado");
 		}
 		
+	}
+
+	@Override
+	public Optional<Unidade> buscarPorId(Long idUnidade) {
+		
+		return repository.findById(idUnidade);
 	}
 
 }

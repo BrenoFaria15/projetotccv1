@@ -1,5 +1,7 @@
 package com.projeto.tccv1.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,13 @@ public class ProfissionalServiceImpl implements ProfissionalService{
 			throw new RegraNegocioException("Ja existe um profissional com esse cartão sus cadastrado");
 		} 
 		
+	}
+
+
+	@Override
+	public Optional<Profissional> buscarPorId(Long idProfissional) {
+		
+		return repository.findById(idProfissional);
 	}
 
 }

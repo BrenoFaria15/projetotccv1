@@ -82,4 +82,12 @@ public class PacienteServiceImpl implements PacienteService {
 		return null;
 	}
 
+
+
+	@Override
+	public Optional<Paciente> buscarPorId(Long idPaciente) {
+		
+		return repository.findById(idPaciente);
+	}
+
 }

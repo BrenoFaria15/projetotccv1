@@ -1,5 +1,7 @@
 package com.projeto.tccv1.service.impl;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,12 @@ public class TipoAtendimentoServiceImpl implements TipoAtendimentoService {
 			throw new RegraNegocioException("Ja existe um tipo de atendimento com esse nome cadastrado");
 		}
 		
+	}
+
+	@Override
+	public Optional<TipoAtendimento> buscarPorId(Long idTipoAtendimento) {
+		
+		return repository.findById(idTipoAtendimento);
 	}
 	
 

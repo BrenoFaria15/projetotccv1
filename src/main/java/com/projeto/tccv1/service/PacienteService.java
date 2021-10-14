@@ -11,5 +11,6 @@ public interface PacienteService {
 	void validarCNS(String cns);
 	Optional<Paciente> finByNome(String nome);
 	Optional<Paciente> findByCpf(String cpf);
+	Optional<Paciente> buscarPorId(Long idPaciente);
 
 }

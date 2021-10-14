@@ -13,13 +13,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.tccv1.model.enums.TipoUsuario;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="atendimento")
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Atendimento {
 	/*id_atendimento,id_profissional,id_paciente,id_tipoatend,data,hora,peso,altura,
 	 * pressao1,pressao2,estatura,temperatura,glicemia,bpm,saturacaom,imc,
@@ -94,6 +103,9 @@ public class Atendimento {
 	@Column(name = "hora_fim")
 	private Timestamp horaFim;
 	
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	@Column(name = "data")
 	private Date data;
 	
