@@ -38,7 +38,7 @@ public class AtendimentoServiceImpl implements AtendimentoService{
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public void deletar(Atendimento atendimento) {
 		Objects.requireNonNull(atendimento.getId_atendimento());
 		repository.delete(atendimento);
@@ -46,11 +46,12 @@ public class AtendimentoServiceImpl implements AtendimentoService{
 	}
 
 	@Override
-	@Transactional
-	public List<Atendimento> buscar(Atendimento AtendimentoFiltro) {
-		Example example = Example.of(AtendimentoFiltro, ExampleMatcher.matching().
-				withIgnoreCase().
-				withStringMatcher(StringMatcher.CONTAINING));
+	@Transactional(readOnly = true)
+	public List<Atendimento> buscar(Atendimento atendimentoFiltro) {
+		Example example = Example.of(atendimentoFiltro, 
+				ExampleMatcher.matching()
+				.withIgnoreCase()
+				.withStringMatcher(StringMatcher.CONTAINING));
 		return repository.findAll(example);
 	}
 

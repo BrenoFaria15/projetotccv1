@@ -7,13 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.projeto.tccv1.model.enums.TipoUsuario;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="unidade")
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Unidade {
 	
 

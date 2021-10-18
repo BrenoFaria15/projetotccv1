@@ -3,6 +3,8 @@ package com.projeto.tccv1.api.dto;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.tccv1.model.entity.Agenda;
 import com.projeto.tccv1.model.entity.Atendimento;
@@ -39,5 +41,8 @@ public class AtendimentoDTO {
 	private String cid;
 	private Timestamp horaInicio;
 	private Timestamp horaFim;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date data;
 }

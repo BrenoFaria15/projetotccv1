@@ -13,13 +13,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.projeto.tccv1.model.enums.TipoUsuario;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="agenda")
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Agenda {
 	
 	@Id
