@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.tccv1.model.enums.TipoUsuario;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +35,8 @@ public class Agenda {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id_agenda;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	@Column(name = "data",nullable = false)
 	private Date data;
 	
