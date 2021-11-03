@@ -1,5 +1,7 @@
 package com.projeto.tccv1.service.impl;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -58,6 +60,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Optional<Usuario> buscarPorId(Long idUsuario) {
 		
 		return repository.findById(idUsuario);
+	}
+
+	@Override
+	public List<Usuario> buscarTodos() {
+		
+		return repository.findAll();
+	}
+
+	@Override
+	@Transactional
+	public Usuario atualizar(Usuario usuario) {
+		Objects.requireNonNull(usuario.getId_usuario());
+		return repository.save(usuario);
+	}
+
+	@Override
+	public void deletar(Usuario usuario) {
+		Objects.requireNonNull(usuario.getId_usuario());
+		repository.delete(usuario);
+		
 	}
 
 	

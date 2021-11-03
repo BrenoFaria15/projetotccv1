@@ -13,12 +13,17 @@ import com.projeto.tccv1.model.entity.Profissional;
 import com.projeto.tccv1.model.entity.TipoAtendimento;
 import com.projeto.tccv1.model.entity.Unidade;
 import com.projeto.tccv1.model.entity.Usuario;
+import com.projeto.tccv1.model.enums.TipoUsuario;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AtendimentoDTO {
 
 	private long id_atendimento;

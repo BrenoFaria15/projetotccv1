@@ -12,5 +12,6 @@ public interface PacienteService {
 	Optional<Paciente> finByNome(String nome);
 	Optional<Paciente> findByCpf(String cpf);
 	Optional<Paciente> buscarPorId(Long idPaciente);
-
+	Paciente atualizar(Paciente paciente);
+	void deletar(Paciente paciente);
 }

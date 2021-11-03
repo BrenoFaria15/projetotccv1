@@ -3,6 +3,7 @@ package com.projeto.tccv1.model.entity;
 import java.sql.Time;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,23 +44,23 @@ public class Agenda {
 	@Column(name = "hora",nullable = false)
 	private Time hora;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_profissional")
 	private Profissional profissional;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_unidade")
 	private Unidade unidade;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_atendimento")
 	private Atendimento atendimento;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_paciente")
 	private Paciente paciente;
 	

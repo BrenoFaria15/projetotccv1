@@ -1,5 +1,6 @@
 package com.projeto.tccv1.service.impl;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -88,6 +89,24 @@ public class PacienteServiceImpl implements PacienteService {
 	public Optional<Paciente> buscarPorId(Long idPaciente) {
 		
 		return repository.findById(idPaciente);
+	}
+
+
+
+	@Override
+	@Transactional
+	public Paciente atualizar(Paciente paciente) {
+		Objects.requireNonNull(paciente.getId_paciente());
+		return repository.save(paciente);
+	}
+
+
+
+	@Override
+	@Transactional
+	public void deletar(Paciente paciente) {
+	 Objects.requireNonNull(paciente.getId_paciente());
+	 repository.delete(paciente);
 	}
 
 }

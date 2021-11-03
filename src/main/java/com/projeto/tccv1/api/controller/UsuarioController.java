@@ -1,12 +1,18 @@
-package com.projeto.tccv1.api.controller;
+  package com.projeto.tccv1.api.controller;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.tccv1.api.dto.UsuarioDTO;
@@ -54,7 +60,51 @@ public class UsuarioController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		
+		
 	}
-
+	
+	@GetMapping("/all")
+	public @ResponseBody List<Usuario> buscarTodos(){
+		return service.buscarTodos();
+	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity atualizar(@PathVariable("id")Long id,@RequestBody UsuarioDTO dto) {
+		return service.buscarPorId(id).map(entity ->
+		{
+			try {
+				Usuario usuario = new Usuario();
+				
+				usuario.setNome(dto.getNome());
+				usuario.setSenha(dto.getSenha());
+				usuario.setTipoUsuario(dto.getTipoUsuario());
+				usuario.setId_usuario(entity.getId_usuario());
+				service.atualizar(usuario);
+				return ResponseEntity.ok(usuario);
+			} catch (RegraNegocioException e) {
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}
+			
+		}).orElseGet(() -> new ResponseEntity("Usuario não encontrado", HttpStatus.BAD_REQUEST));
+	}
+	
+	@GetMapping("/buscarporid/{id}")
+	public ResponseEntity  buscarporId(@PathVariable("id")Long id){
+		return service.buscarPorId(id).map(entity ->{
+			service.buscarPorId(entity.getId_usuario());
+			return ResponseEntity.ok(entity);
+		}
+		
+				
+				).orElseGet(() -> new ResponseEntity("Usuario não encontrado", HttpStatus.BAD_REQUEST));
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity deletar(@PathVariable("id")Long id) {
+		return service.buscarPorId(id).map(entity ->{
+			service.deletar(entity);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}).orElseGet(() ->  new ResponseEntity("Usuario não encontrado", HttpStatus.BAD_REQUEST)); 
+	}
 	
 }

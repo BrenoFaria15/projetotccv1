@@ -7,11 +7,16 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.tccv1.model.enums.TipoUsuario;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AgendaDTO {
 	private long atendimento;
 	private long profissional;
