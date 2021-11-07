@@ -29,12 +29,12 @@ public class ProfissionalDTO {
 	private String celular;
 	private String municipio;
 	private String especialidade;
-	private String nome_conselho;
-	private String cd_conselho;
+	private String nomeConselho;
+	private String cdConselho;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private Date data_nascimento;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dataNascimento;
 	
-	private boolean flg_ativo;
+	private boolean flgAtivo;
 }

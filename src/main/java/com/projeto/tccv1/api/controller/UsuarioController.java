@@ -107,4 +107,6 @@ public class UsuarioController {
 		}).orElseGet(() ->  new ResponseEntity("Usuario não encontrado", HttpStatus.BAD_REQUEST)); 
 	}
 	
+	
+	
 }

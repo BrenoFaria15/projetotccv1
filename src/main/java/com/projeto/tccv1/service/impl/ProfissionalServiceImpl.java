@@ -1,6 +1,10 @@
 package com.projeto.tccv1.service.impl;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +28,7 @@ public class ProfissionalServiceImpl implements ProfissionalService{
 	
 
 	@Override
+	@Transactional
 	public Profissional novoProfissional(Profissional profissional) {
 		validarCPF(profissional.getCpf());
 		validarRG(profissional.getRg());
@@ -63,6 +68,30 @@ public class ProfissionalServiceImpl implements ProfissionalService{
 	public Optional<Profissional> buscarPorId(Long idProfissional) {
 		
 		return repository.findById(idProfissional);
+	}
+
+
+	@Override
+	@Transactional
+	public Profissional atualizar(Profissional profissional) {
+		Objects.requireNonNull(profissional.getId_profissional());
+		
+		return repository.save(profissional);
+	}
+
+
+	@Override
+	@Transactional
+	public void deletar(Profissional profissional) {
+		Objects.requireNonNull(profissional.getId_profissional());
+		repository.delete(profissional);
+	}
+
+
+	@Override
+	public List<Profissional> buscarTodos() {
+		
+		return repository.findAll();
 	}
 
 }

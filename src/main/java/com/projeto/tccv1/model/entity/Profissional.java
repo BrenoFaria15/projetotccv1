@@ -54,7 +54,7 @@ public class Profissional
 	@Column(name = "bairro",nullable = false)
 	private String bairro;
 	
-	@Column(name = "complemento",nullable = false)
+	@Column(name = "complemento")
 	private String complemento;
 	
 	@Column(unique = true,name = "rg")
@@ -70,18 +70,18 @@ public class Profissional
 	private String especialidade;
 	
 	@Column(name = "nome_conselho")
-	private String nome_conselho;
+	private String nomeConselho;
 	
 	@Column(name = "cd_conselho")
-	private String cd_conselho;
+	private String cdConselho;
 	
 	@Column(name = "data_nascimento",nullable = false)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private Date data_nascimento;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dataNascimento;
 	
 	@Column(name = "flg_ativo",nullable = false)
-	private boolean flg_ativo;
+	private boolean flgAtivo;
 
 	
 	

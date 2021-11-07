@@ -1,11 +1,18 @@
 package com.projeto.tccv1.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.tccv1.api.dto.ProfissionalDTO;
@@ -29,19 +36,19 @@ public class ProfissionalController {
 		
 		Profissional profissional = Profissional.builder().
 				bairro(dto.getBairro()).
-				cd_conselho(dto.getCd_conselho()).
+				cdConselho(dto.getCdConselho()).
 				celular(dto.getCelular()).
 				cep(dto.getCep()).
 				cns(dto.getCns()).
 				complemento(dto.getComplemento()).
 				cpf(dto.getCpf()).
-				data_nascimento(dto.getData_nascimento()).
+				dataNascimento(dto.getDataNascimento()).
 				especialidade(dto.getEspecialidade()).
-				flg_ativo(dto.isFlg_ativo()).
+				flgAtivo(dto.isFlgAtivo()).
 				logradouro(dto.getLogradouro()).
 				municipio(dto.getMunicipio()).
 				nome(dto.getNome()).
-				nome_conselho(dto.getNome_conselho()).
+				nomeConselho(dto.getNomeConselho()).
 				numero(dto.getNumero()).
 				rg(dto.getRg()).build();		
 		try {
@@ -53,5 +60,76 @@ public class ProfissionalController {
 		
 		
 	}
+	
+	
+	@PutMapping("{id}")
+	public ResponseEntity atualizar(@PathVariable("id")Long id,@RequestBody ProfissionalDTO dto) {
+		
+		return service.buscarPorId(id).map(entity -> {
+			
+			try {
+
+				Profissional profissional = new Profissional();
+				
+				
+				profissional.setBairro(dto.getBairro());
+				profissional.setCdConselho(dto.getCdConselho());
+				profissional.setCelular(dto.getCelular());
+				profissional.setCep(dto.getCep());
+				profissional.setCns(dto.getCns());
+				profissional.setComplemento(dto.getComplemento());
+				profissional.setCpf(dto.getCpf());
+				profissional.setDataNascimento(dto.getDataNascimento());
+				profissional.setEspecialidade(dto.getEspecialidade());
+				profissional.setFlgAtivo(dto.isFlgAtivo());
+				profissional.setLogradouro(dto.getLogradouro());
+				profissional.setMunicipio(dto.getMunicipio());
+				profissional.setNome(dto.getNome());
+				profissional.setNomeConselho(dto.getNomeConselho());
+				profissional.setNumero(dto.getNumero());
+				profissional.setRg(dto.getRg());
+				profissional.setId_profissional(entity.getId_profissional());
+				
+				
+				service.atualizar(profissional);
+				return ResponseEntity.ok(profissional);
+			} catch (RegraNegocioException e) {
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}
+			
+		
+		}).orElseGet(() -> new ResponseEntity("Profissional não encontrado", HttpStatus.BAD_REQUEST));
+		
+	
+		
+		
+	}
+	
+	@GetMapping("/all")
+	public @ResponseBody List<Profissional> buscarTodos(){
+		return service.buscarTodos();
+	}
+	
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity deletar(@PathVariable("id")Long id) {
+		return service.buscarPorId(id).map(entity ->{
+			service.deletar(entity);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}).orElseGet(() ->  new ResponseEntity("Profissional não encontrado", HttpStatus.BAD_REQUEST)); 
+	}
+	
+	@GetMapping("/buscarporid/{id}")
+	public ResponseEntity  buscarporId(@PathVariable("id")Long id){
+		return service.buscarPorId(id).map(entity ->{
+			service.buscarPorId(entity.getId_profissional());
+			return ResponseEntity.ok(entity);
+		}
+		
+				
+				).orElseGet(() -> new ResponseEntity("Profissional não encontrado", HttpStatus.BAD_REQUEST));
+	}
+
+
 
 }

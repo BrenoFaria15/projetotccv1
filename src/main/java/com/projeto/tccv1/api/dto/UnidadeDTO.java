@@ -24,4 +24,6 @@ public class UnidadeDTO {
 	private String complemento;
 	private String municipio;
 	private String telefone;
+	private String nomeFantasia;
 }
+

@@ -54,6 +54,8 @@ public class Unidade {
 	@Column(name = "telefone")
 	private String telefone;
 	
+	@Column(name = "nome_fantasia")
+	private String nomeFantasia;
 	
 	
 	
