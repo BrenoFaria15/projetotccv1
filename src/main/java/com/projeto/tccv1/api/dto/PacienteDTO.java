@@ -28,20 +28,20 @@ public class PacienteDTO {
 	private String complemento;
 	private String rg;
 	private String celular;
-	private String nome_pai;
-	private String nome_mae;
+	private String nomePai;
+	private String nomeMae;
 	private String municipio;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private Date data_nascimento;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dataNascimento;
 	
-	private boolean flg_ativo;
-	private boolean flg_obito;
+	private boolean flgAtivo;
+	private boolean flgObito;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private Date data_obito;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private Date dataObito;
 	
 	private String convenio;
 

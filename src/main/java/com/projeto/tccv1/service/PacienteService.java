@@ -1,5 +1,6 @@
 package com.projeto.tccv1.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.projeto.tccv1.model.entity.Paciente;
@@ -14,4 +15,5 @@ public interface PacienteService {
 	Optional<Paciente> buscarPorId(Long idPaciente);
 	Paciente atualizar(Paciente paciente);
 	void deletar(Paciente paciente);
+	List<Paciente> buscarTodos();
 }

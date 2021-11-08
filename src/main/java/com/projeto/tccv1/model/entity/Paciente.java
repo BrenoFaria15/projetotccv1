@@ -66,29 +66,29 @@ FLG_Obito,data_obito,certidão de obito, convenio,sexo}]*/
 	private String celular;
 	
 	@Column(name = "nome_pai")
-	private String nome_pai;
+	private String nomePai;
 	
 	@Column(name = "nome_mae")
-	private String nome_mae;
+	private String nomeMae;
 	
 	@Column(name = "municipio")
 	private String municipio;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "data_nascimento",nullable = false)
-	private Date data_nascimento;
+	private Date dataNascimento;
 	
 	@Column(name = "flg_ativo")
-	private boolean flg_ativo;
+	private boolean flgAtivo;
 
 	@Column(name = "flg_obito")
-	private boolean flg_obito;
+	private boolean flgObito;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "data_obito")
-	private Date data_obito;
+	private Date dataObito;
 	
 	@Column(name = "convenio")
 	private String convenio;

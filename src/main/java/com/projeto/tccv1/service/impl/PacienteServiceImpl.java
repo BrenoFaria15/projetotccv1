@@ -1,5 +1,6 @@
 package com.projeto.tccv1.service.impl;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -107,6 +108,14 @@ public class PacienteServiceImpl implements PacienteService {
 	public void deletar(Paciente paciente) {
 	 Objects.requireNonNull(paciente.getId_paciente());
 	 repository.delete(paciente);
+	}
+
+
+
+	@Override
+	public List<Paciente> buscarTodos() {
+		
+		return repository.findAll();
 	}
 
 }
