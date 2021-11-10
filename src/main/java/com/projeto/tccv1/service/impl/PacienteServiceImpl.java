@@ -80,8 +80,8 @@ public class PacienteServiceImpl implements PacienteService {
 
 	@Override
 	public Optional<Paciente> findByCpf(String cpf) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return repository.findByCpf(cpf);
 	}
 
 

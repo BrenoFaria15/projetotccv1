@@ -1,6 +1,8 @@
 package com.projeto.tccv1.api.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -93,27 +95,44 @@ public class AtendimentoContoller {
 	
 	
 	@GetMapping
-	public ResponseEntity buscar(@RequestParam(value="data",required = false)Date data,
-								@RequestParam("profissional")Long idProfissional,
-								 @RequestParam("paciente")Long idPaciente
+	public ResponseEntity buscar(
+			@RequestParam(value="data")String data,						
+			 @RequestParam(value="cpf", required = false)String cpf,
+			 @RequestParam(value="avaliacao")String avaliacao
 								) {
-		
 		Atendimento atendimentoFiltro = new Atendimento();
-		atendimentoFiltro.setData(data);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
-		Optional<Profissional>profissional = profissionalService.buscarPorId(idProfissional);
-		if(!profissional.isPresent()) {
-			return ResponseEntity.badRequest().body("Profissional com esse id não encontrado");
-		}else {
-			atendimentoFiltro.setProfissional(profissional.get());
+		
+		Date dataConvertida;
+		
+		try {
+			dataConvertida = formatter.parse(data);
+			atendimentoFiltro.setData(dataConvertida);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+			
+			
 		}
 		
-		Optional<Paciente>paciente = pacienteService.buscarPorId(idPaciente);
+		
+		
+		
+		//Optional<Profissional>profissional = profissionalService.buscarPorId(idProfissional);
+		//if(!profissional.isPresent()) {
+		//	return ResponseEntity.badRequest().body("Profissional com esse id não encontrado");
+		//}else {
+		//	atendimentoFiltro.setProfissional(profissional.get());
+		//}
+		
+		Optional<Paciente>paciente = pacienteService.findByCpf(cpf);
 		if(!paciente.isPresent()) {
-			return ResponseEntity.badRequest().body("Paciente com esse id não encontrado");
+			return ResponseEntity.badRequest().body("Paciente não encontrado");
 		}else {
 			atendimentoFiltro.setPaciente(paciente.get());
 		}
+		atendimentoFiltro.setAvaliacao(avaliacao);
 		
 		List<Atendimento> atendimentos= service.buscar(atendimentoFiltro);
 		return ResponseEntity.ok(atendimentos);

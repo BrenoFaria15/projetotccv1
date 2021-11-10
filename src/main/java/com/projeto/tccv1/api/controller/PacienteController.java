@@ -122,6 +122,8 @@ public class PacienteController {
 	}
 	
 
+	
+
 @GetMapping("/buscarporid/{id}")
 	public ResponseEntity  buscarporId(@PathVariable("id")Long id){
 		return service.buscarPorId(id).map(entity ->{

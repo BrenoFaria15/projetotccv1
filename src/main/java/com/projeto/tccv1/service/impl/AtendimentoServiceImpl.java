@@ -46,14 +46,15 @@ public class AtendimentoServiceImpl implements AtendimentoService{
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<Atendimento> buscar(Atendimento atendimentoFiltro) {
 		Example example = Example.of(atendimentoFiltro, 
-				ExampleMatcher.matching()
+				ExampleMatcher.matchingAny().withIgnoreNullValues()
 				.withIgnoreCase()
 				.withStringMatcher(StringMatcher.CONTAINING));
 		return repository.findAll(example);
 	}
+	
 
 	@Override
 	public Optional<Atendimento> buscarPorId(Long idAtendimento) {
