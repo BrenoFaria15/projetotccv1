@@ -49,9 +49,9 @@ public class AtendimentoServiceImpl implements AtendimentoService{
 	@Transactional
 	public List<Atendimento> buscar(Atendimento atendimentoFiltro) {
 		Example example = Example.of(atendimentoFiltro, 
-				ExampleMatcher.matchingAny().withIgnoreNullValues()
+				ExampleMatcher.matchingAny()
 				.withIgnoreCase()
-				.withStringMatcher(StringMatcher.CONTAINING));
+				);
 		return repository.findAll(example);
 	}
 	

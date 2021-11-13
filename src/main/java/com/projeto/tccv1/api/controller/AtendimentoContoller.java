@@ -97,8 +97,8 @@ public class AtendimentoContoller {
 	@GetMapping
 	public ResponseEntity buscar(
 			@RequestParam(value="data")String data,						
-			 @RequestParam(value="cpf", required = false)String cpf,
-			 @RequestParam(value="avaliacao")String avaliacao
+			 @RequestParam(value="idPaciente",required = false)Long idPaciente,
+			 @RequestParam(value="idProfissional",required = false)Long idProfissional
 								) {
 		Atendimento atendimentoFiltro = new Atendimento();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -116,23 +116,22 @@ public class AtendimentoContoller {
 			
 		}
 		
-		
-		
-		
-		//Optional<Profissional>profissional = profissionalService.buscarPorId(idProfissional);
-		//if(!profissional.isPresent()) {
-		//	return ResponseEntity.badRequest().body("Profissional com esse id não encontrado");
-		//}else {
-		//	atendimentoFiltro.setProfissional(profissional.get());
-		//}
-		
-		Optional<Paciente>paciente = pacienteService.findByCpf(cpf);
+
+		Optional<Paciente>paciente = pacienteService.buscarPorId(idPaciente);
 		if(!paciente.isPresent()) {
-			return ResponseEntity.badRequest().body("Paciente não encontrado");
+			return ResponseEntity.badRequest().body("Paciente com esse id não encontrado");
 		}else {
 			atendimentoFiltro.setPaciente(paciente.get());
 		}
-		atendimentoFiltro.setAvaliacao(avaliacao);
+	
+		
+		Optional<Profissional>profissional = profissionalService.buscarPorId(idProfissional);
+		if(!profissional.isPresent()) {
+			return ResponseEntity.badRequest().body("Profissional com esse id não encontrado");
+		}else {
+			atendimentoFiltro.setProfissional(profissional.get());
+		}
+		
 		
 		List<Atendimento> atendimentos= service.buscar(atendimentoFiltro);
 		return ResponseEntity.ok(atendimentos);
