@@ -1,5 +1,6 @@
 package com.projeto.tccv1.model.entity;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -86,6 +87,7 @@ public class Atendimento {
 	@Column(name = "saturacao")
 	private String saturacao;
 	
+	
 	@Column(name = "imc")
 	private float imc;
 	
@@ -98,11 +100,15 @@ public class Atendimento {
 	@Column(name = "cid")
 	private String cid;
 	
-	@Column(name = "hora_inicio")
-	private Timestamp horaInicio;
 	
+	@Column(name = "hora_inicio")
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm")
+	private String horaInicio;
+	
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm")
 	@Column(name = "hora_fim")
-	private Timestamp horaFim;
+	private String horaFim;
 	
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")

@@ -1,5 +1,6 @@
 package com.projeto.tccv1.api.dto;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -44,8 +45,14 @@ public class AtendimentoDTO {
 	private String avaliacao;
 	private String entrevistaClinica;
 	private String cid;
-	private Timestamp horaInicio;
-	private Timestamp horaFim;
+	
+
+	
+	private String horaInicio;
+	
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm")
+	private String horaFim;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

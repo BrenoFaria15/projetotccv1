@@ -1,5 +1,6 @@
 package com.projeto.tccv1.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -44,6 +45,12 @@ public class TipoAtendimentoServiceImpl implements TipoAtendimentoService {
 	public Optional<TipoAtendimento> buscarPorId(Long idTipoAtendimento) {
 		
 		return repository.findById(idTipoAtendimento);
+	}
+
+	@Override
+	public List<TipoAtendimento> buscarTodos() {
+		
+		return repository.findAll();
 	}
 	
 
