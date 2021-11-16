@@ -1,5 +1,7 @@
 package com.projeto.tccv1.service.impl;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projeto.tccv1.model.entity.Atendimento;
+import com.projeto.tccv1.model.entity.Paciente;
+import com.projeto.tccv1.model.entity.Profissional;
 import com.projeto.tccv1.model.repository.AtendimentoRepository;
 import com.projeto.tccv1.service.AtendimentoService;
 
@@ -60,6 +64,18 @@ public class AtendimentoServiceImpl implements AtendimentoService{
 	public Optional<Atendimento> buscarPorId(Long idAtendimento) {
 		
 		return repository.findById(idAtendimento);
+	}
+
+	@Override
+	public List<Atendimento> buscarPaciente(Paciente paciente) {
+		
+		return repository.findByPaciente(paciente);
+	}
+
+	@Override
+	public List<Atendimento> buscarAtendimento(Paciente paciente, Profissional profissional, LocalDate data) {
+		
+		return repository.findByPacienteAndProfissionalAndData(paciente, profissional, data);
 	}
 
 }

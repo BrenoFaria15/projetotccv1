@@ -1,5 +1,6 @@
 package com.projeto.tccv1.model.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -77,7 +78,7 @@ FLG_Obito,data_obito,certidão de obito, convenio,sexo}]*/
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "data_nascimento",nullable = false)
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	
 	@Column(name = "flg_ativo")
 	private boolean flgAtivo;
@@ -88,7 +89,7 @@ FLG_Obito,data_obito,certidão de obito, convenio,sexo}]*/
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "data_obito")
-	private Date dataObito;
+	private LocalDate dataObito;
 	
 	@Column(name = "convenio")
 	private String convenio;

@@ -1,5 +1,6 @@
 package com.projeto.tccv1.api.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -34,14 +35,14 @@ public class PacienteDTO {
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	
 	private boolean flgAtivo;
 	private boolean flgObito;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date dataObito;
+	private LocalDate dataObito;
 	
 	private String convenio;
 

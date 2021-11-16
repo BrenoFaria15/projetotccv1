@@ -1,5 +1,6 @@
 package com.projeto.tccv1.model.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -78,7 +79,7 @@ public class Profissional
 	@Column(name = "data_nascimento",nullable = false)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 	
 	@Column(name = "flg_ativo",nullable = false)
 	private boolean flgAtivo;

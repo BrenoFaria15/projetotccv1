@@ -1,5 +1,9 @@
 package com.projeto.tccv1;
 
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -20,5 +24,10 @@ public class ProjetoTcCv1Application implements WebMvcConfigurer {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoTcCv1Application.class, args);
 	}
+	
+	@PostConstruct
+    public void init() {
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
+    }
 
 }

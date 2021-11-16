@@ -2,7 +2,11 @@ package com.projeto.tccv1.api.dto;
 
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
+
+import javax.persistence.Column;
+
+import java.sql.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,6 +49,9 @@ public class AtendimentoDTO {
 	private String avaliacao;
 	private String entrevistaClinica;
 	private String cid;
+	private  int pressao1;
+	private  int pressao2;
+	private String hipotese;
 	
 
 	
@@ -55,6 +62,6 @@ public class AtendimentoDTO {
 	private String horaFim;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private Date data;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private LocalDate data;
 }

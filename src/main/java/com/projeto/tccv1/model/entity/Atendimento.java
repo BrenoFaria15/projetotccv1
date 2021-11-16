@@ -2,7 +2,8 @@ package com.projeto.tccv1.model.entity;
 
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -74,6 +75,12 @@ public class Atendimento {
 	@Column(name = "altura")
 	private  int altura;
 	
+	@Column(name = "pressao1")
+	private  int pressao1;
+	
+	@Column(name = "pressao2")
+	private  int pressao2;
+	
 	@Column(name = "temperatura")
 	private float temperatura;
 	
@@ -100,6 +107,10 @@ public class Atendimento {
 	@Column(name = "cid")
 	private String cid;
 	
+	@Column(name = "hipotese")
+	private String hipotese;
+	
+	
 	
 	@Column(name = "hora_inicio")
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm")
@@ -114,7 +125,7 @@ public class Atendimento {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	@Column(name = "data")
-	private Date data;
+	private LocalDate data;
 	
 	
 	

@@ -3,7 +3,8 @@ package com.projeto.tccv1.api.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.tccv1.api.dto.AtendimentoDTO;
 import com.projeto.tccv1.exeception.RegraNegocioException;
 import com.projeto.tccv1.model.entity.Agenda;
 import com.projeto.tccv1.model.entity.Atendimento;
+import com.projeto.tccv1.model.entity.Exame;
 import com.projeto.tccv1.model.entity.Paciente;
 import com.projeto.tccv1.model.entity.Profissional;
 import com.projeto.tccv1.model.entity.TipoAtendimento;
@@ -104,17 +107,11 @@ public class AtendimentoContoller {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
 		
-		Date dataConvertida;
+		LocalDate dataConvertida;
 		
-		try {
-			dataConvertida = formatter.parse(data);
+		
+			dataConvertida =  LocalDate.parse(data);
 			atendimentoFiltro.setData(dataConvertida);
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-			
-			
-		}
 		
 
 		Optional<Paciente>paciente = pacienteService.buscarPorId(idPaciente);
@@ -137,8 +134,68 @@ public class AtendimentoContoller {
 		return ResponseEntity.ok(atendimentos);
 	}
 	
+	/*@GetMapping("/buscarporpaciente/{id}")
+	public ResponseEntity  buscarporId(@PathVariable("id")Long id){
+		return service.buscarPorId(id).map(entity ->{
+			service.buscarPaciente(entity.getPaciente().getId_paciente());
+			return ResponseEntity.ok(entity);
+		}
+		
+				
+				).orElseGet(() -> new ResponseEntity("Paciente não encontrado", HttpStatus.BAD_REQUEST));
+	}*/
+	
+	@GetMapping("/buscarporpaciente/{id}")
+	public @ResponseBody List<Atendimento> buscarPaciente(@PathVariable("id")Long id){
+		Paciente pacienteFiltro = pacienteService.buscarPorId(id).get();
+		return service.buscarPaciente(pacienteFiltro);
+	}
+	
+	@GetMapping("/buscaratendimentos")
+	public @ResponseBody List<Atendimento> buscarAtendimentos(
+			@RequestParam(value="data",required = false)String data,						
+			 @RequestParam(value="idPaciente")Long idPaciente,
+			 @RequestParam(value="idProfissional",required = false)Long idProfissional) throws ParseException{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		
+		LocalDate dataConvertida;
+		
+		
+	
+			dataConvertida = LocalDate.parse(data);
+			
+			
+		
+		
+		Paciente pacienteFiltro = pacienteService.buscarPorId(idPaciente).get();
+		Profissional profissionalFiltro =profissionalService.buscarPorId(idProfissional).get();
+		return service.buscarAtendimento(pacienteFiltro, profissionalFiltro,dataConvertida);
+	}
+	
+	@GetMapping("/buscarporid/{id}")
+	public ResponseEntity  buscarporId(@PathVariable("id")Long id){
+		return service.buscarPorId(id).map(entity ->{
+			service.buscarPorId(entity.getId_atendimento());
+			return ResponseEntity.ok(entity);
+		}
+		
+				
+				).orElseGet(() -> new ResponseEntity("Atendimento não encontrado", HttpStatus.BAD_REQUEST));
+	}
+	
+	
+	
+	
+	
+
 	private Atendimento converter(AtendimentoDTO dto) {
 		Atendimento atendimento = new Atendimento();
+		
+		LocalDate dataConvertida;
+		
+		
+		
 		
 		atendimento.setId_atendimento(dto.getId_atendimento());
 		atendimento.setAltura(dto.getAltura());
@@ -155,6 +212,9 @@ public class AtendimentoContoller {
 		atendimento.setPeso(dto.getPeso());
 		atendimento.setSaturacao(dto.getSaturacao());
 		atendimento.setTemperatura(dto.getTemperatura());
+		atendimento.setPressao1(dto.getPressao1());
+		atendimento.setPressao2(dto.getPressao2());
+		atendimento.setHipotese(dto.getHipotese());
 		
 		//Agenda agenda =  agendaService.buscarPorId(dto.getId_agenda())
 		//.orElseThrow(() -> new RegraNegocioException("Agenda com esse id não encontrado"));
