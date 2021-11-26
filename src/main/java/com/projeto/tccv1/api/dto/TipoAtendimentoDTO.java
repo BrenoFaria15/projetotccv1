@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TipoAtendimentoDTO {
 
+	private long id_tipo_atendimento;
 	private String tipoNome;
 	private String Descricao;
 }

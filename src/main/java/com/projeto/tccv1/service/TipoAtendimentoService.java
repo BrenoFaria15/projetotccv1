@@ -11,4 +11,6 @@ public interface TipoAtendimentoService {
 	void ValidarTipoAtendimento(String TipoAtendimento);
 	Optional<TipoAtendimento> buscarPorId(Long idTipoAtendimento);
 	List<TipoAtendimento>buscarTodos();
+	TipoAtendimento atualizar(TipoAtendimento TipoAtend);
+	void deletar(TipoAtendimento TipoAtend);
 }

@@ -197,6 +197,7 @@ public class AtendimentoContoller {
 		
 		
 		
+		
 		atendimento.setId_atendimento(dto.getId_atendimento());
 		atendimento.setAltura(dto.getAltura());
 		atendimento.setAvaliacao(dto.getAvaliacao());

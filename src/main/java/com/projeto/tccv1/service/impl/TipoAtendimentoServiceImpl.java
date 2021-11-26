@@ -1,6 +1,7 @@
 package com.projeto.tccv1.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -52,6 +53,25 @@ public class TipoAtendimentoServiceImpl implements TipoAtendimentoService {
 		
 		return repository.findAll();
 	}
+
+	@Override
+	@Transactional
+	public TipoAtendimento atualizar(TipoAtendimento TipoAtend) {
+		Objects.requireNonNull(TipoAtend.getId_tipo_atendimento());	
+			ValidarTipoAtendimento(TipoAtend.getTipoNome());
+			return repository.save(TipoAtend);
+	
+	}
+
+	@Override
+	@Transactional
+	public void deletar(TipoAtendimento TipoAtend) {
+		Objects.requireNonNull(TipoAtend.getId_tipo_atendimento());
+		repository.delete(TipoAtend);
+		
+	}
+		
+	
 	
 
 }
