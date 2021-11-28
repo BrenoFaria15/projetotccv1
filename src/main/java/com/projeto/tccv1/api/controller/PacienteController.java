@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -138,6 +139,17 @@ public class PacienteController {
 				
 				).orElseGet(() -> new ResponseEntity("Paciente não encontrado", HttpStatus.BAD_REQUEST));
 	}
+
+@GetMapping("/buscarporcns/")
+public ResponseEntity  buscarporCns(@RequestParam("cns")String cns){
+	return service.buscarPorCns(cns).map(entity ->{
+		
+		return ResponseEntity.ok(entity);
+	}
+	
+			
+			).orElseGet(() -> new ResponseEntity("Paciente não encontrado", HttpStatus.BAD_REQUEST));
+}
 	
 	@GetMapping("/relatorio-paciente")
 	public ResponseEntity<byte[]>relatorioPaciente(){

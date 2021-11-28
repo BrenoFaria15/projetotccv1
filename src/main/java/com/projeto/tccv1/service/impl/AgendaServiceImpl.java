@@ -1,5 +1,7 @@
 package com.projeto.tccv1.service.impl;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -51,6 +53,21 @@ public class AgendaServiceImpl implements AgendaService{
 	public void deletar(Agenda agenda) {
 		Objects.requireNonNull(agenda.getId_agenda());
 		repository.delete(agenda);
+		
+	}
+
+
+	@Override
+	public List<Agenda> buscarPorData(LocalDate data) {
+		
+		return repository.findByData(data);
+	}
+
+
+	@Override
+	@Transactional
+	public void atualizarPresenca(Agenda agenda) {
+				atualizar(agenda);
 		
 	}
 

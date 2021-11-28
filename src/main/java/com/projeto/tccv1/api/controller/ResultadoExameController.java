@@ -1,14 +1,18 @@
 package com.projeto.tccv1.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.tccv1.api.dto.ResultadoExameDTO;
@@ -65,6 +69,24 @@ public class ResultadoExameController {
 		
 	}
 	
+	@GetMapping("/buscarporpaciente/{id}")
+	public @ResponseBody List<ResultadoExame> buscarPaciente(@PathVariable("id")String id){
+		long idInt = Integer.parseInt(id);
+		Paciente pacienteFiltro = pacienteService.buscarPorId(idInt).get();
+		return service.buscarPorPaciente(pacienteFiltro);
+	}
+	
+	@GetMapping("/buscarporid/{id}")
+	public ResponseEntity  buscarporId(@PathVariable("id")Long id){
+		return service.buscarPorId(id).map(entity ->{
+			service.buscarPorId(entity.getId_resultado());
+			return ResponseEntity.ok(entity);
+		}
+		
+				
+				).orElseGet(() -> new ResponseEntity("Resultado não encontrado", HttpStatus.BAD_REQUEST));
+	}
+	
 	
 	
 	
@@ -72,6 +94,7 @@ public class ResultadoExameController {
 		ResultadoExame resultado = new ResultadoExame();
 		
 		resultado.setResultado(dto.getResultado());
+		resultado.setData(dto.getData());
 		
 		Exame exame = exameService.buscarPorId(dto.getId_exame())
 				.orElseThrow(() -> new RegraNegocioException("Exame com esse id não encontrado"));

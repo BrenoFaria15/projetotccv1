@@ -1,6 +1,7 @@
 package com.projeto.tccv1.model.entity;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -37,12 +38,13 @@ public class Agenda {
 	private long id_agenda;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "data",nullable = false)
-	private Date data;
+	private LocalDate data;
 	
 	@Column(name = "hora",nullable = false)
-	private Time hora;
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm")
+	private String hora;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_profissional")
@@ -52,9 +54,6 @@ public class Agenda {
 	@JoinColumn(name="id_unidade")
 	private Unidade unidade;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_atendimento")
-	private Atendimento atendimento;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_usuario")
@@ -64,8 +63,8 @@ public class Agenda {
 	@JoinColumn(name="id_paciente")
 	private Paciente paciente;
 	
-	@Column(name="flg_atendido")
-	private boolean flg_atendido;
+	@Column(name="flg_presente")
+	private boolean flg_presente;
 	
 	
 	

@@ -113,7 +113,7 @@ public class AtendimentoContoller {
 			dataConvertida =  LocalDate.parse(data);
 			atendimentoFiltro.setData(dataConvertida);
 		
-
+//if(paciente!=NULL){}
 		Optional<Paciente>paciente = pacienteService.buscarPorId(idPaciente);
 		if(!paciente.isPresent()) {
 			return ResponseEntity.badRequest().body("Paciente com esse id não encontrado");
@@ -146,8 +146,9 @@ public class AtendimentoContoller {
 	}*/
 	
 	@GetMapping("/buscarporpaciente/{id}")
-	public @ResponseBody List<Atendimento> buscarPaciente(@PathVariable("id")Long id){
-		Paciente pacienteFiltro = pacienteService.buscarPorId(id).get();
+	public @ResponseBody List<Atendimento> buscarPaciente(@PathVariable("id")String id){
+		long idInt = Integer.parseInt(id);
+		Paciente pacienteFiltro = pacienteService.buscarPorId(idInt).get();
 		return service.buscarPaciente(pacienteFiltro);
 	}
 	

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.projeto.tccv1.model.entity.Paciente;
 import com.projeto.tccv1.model.entity.ResultadoExame;
 import com.projeto.tccv1.model.repository.ResultadoExameRepository;
 import com.projeto.tccv1.service.ResultadoExameService;
@@ -47,6 +48,12 @@ public class ResultadoExameServiceImpl implements ResultadoExameService{
 	public Optional<ResultadoExame> buscarPorId(Long idResultado) {
 		
 		return repository.findById(idResultado);
+	}
+
+	@Override
+	public List<ResultadoExame> buscarPorPaciente(Paciente paciente) {
+		
+		return repository.findByPaciente(paciente);
 	}
 
 }

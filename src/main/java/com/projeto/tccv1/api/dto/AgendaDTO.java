@@ -2,6 +2,7 @@ package com.projeto.tccv1.api.dto;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,16 +19,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AgendaDTO {
-	private long atendimento;
 	private long profissional;
 	private long unidade;
 	private long paciente;
 	private long usuario;
-	private boolean flg_atendido;
+	private boolean flg_presente;
 	
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	private Date data;
-	private Time hora;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate data;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm")
+	private String hora;
+	
+	
+	
+	
 }

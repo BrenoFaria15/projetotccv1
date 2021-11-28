@@ -1,8 +1,12 @@
 package com.projeto.tccv1.api.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -68,6 +72,31 @@ public class AgendaController {
 		}).orElseGet(() -> new ResponseEntity("Agendamento não encontrado",HttpStatus.BAD_REQUEST));
 	}
 	
+	@PutMapping("/alterarpresenca/{id}")
+	public ResponseEntity atualizarPresenca(@PathVariable("id")String id,@RequestBody AgendaDTO dto) {
+		long idInt = Integer.parseInt(id);
+		return service.buscarPorId(idInt).map(entity ->{
+			try {
+				
+				entity.setFlg_presente(dto.isFlg_presente());
+				service.atualizarPresenca(entity);
+				return ResponseEntity.ok(entity);
+			} catch (RegraNegocioException e) {
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}	
+		}).orElseGet(() -> new ResponseEntity("Agendamento não encontrado",HttpStatus.BAD_REQUEST));
+	}
+	
+	@GetMapping("/buscarpordata/{data}")
+	public @ResponseBody List<Agenda> buscarPorData(@PathVariable("data")String data){
+		LocalDate dataConvertida;
+		dataConvertida = LocalDate.parse(data);
+		 
+		return service.buscarPorData(dataConvertida);
+	}
+	
+	
+	
 	@DeleteMapping("{id}")
 	public ResponseEntity deletar(@PathVariable("id")Long id ) {
 		return service.buscarPorId(id).map(entidade ->{
@@ -80,7 +109,7 @@ public class AgendaController {
 		Agenda agenda = new Agenda();
 		
 		agenda.setData(dto.getData());
-		agenda.setFlg_atendido(dto.isFlg_atendido());
+		agenda.setFlg_presente(dto.isFlg_presente());
 		agenda.setHora(dto.getHora());
 		
 		Paciente paciente =pacienteService.buscarPorId(dto.getPaciente())
@@ -99,9 +128,7 @@ public class AgendaController {
 				.orElseThrow(() -> new RegraNegocioException("Usuario com esse id não encontrado"));
 		agenda.setUsuario(usuario);
 		
-		Atendimento atendimento = atendimentoService.buscarPorId(dto.getAtendimento())
-				.orElseThrow(() -> new RegraNegocioException("Atendimento com esse id não encontrado"));
-		agenda.setAtendimento(atendimento);
+		
 		
 		return agenda;
 	}

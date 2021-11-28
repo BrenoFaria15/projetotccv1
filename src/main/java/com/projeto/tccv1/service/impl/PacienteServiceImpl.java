@@ -118,4 +118,12 @@ public class PacienteServiceImpl implements PacienteService {
 		return repository.findAll();
 	}
 
+
+
+	@Override
+	public Optional<Paciente> buscarPorCns(String cns) {
+		
+		return repository.findByCns(cns);
+	}
+
 }

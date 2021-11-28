@@ -12,4 +12,5 @@ public interface PacienteRepository  extends JpaRepository<Paciente,Long>{
 	boolean existsByRg(String rg);
 	boolean existsByCns(String cns);
 	Optional<Paciente> findByCpf(String cpf);
+	Optional<Paciente> findByCns(String cns);
 }

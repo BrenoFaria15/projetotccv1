@@ -3,6 +3,7 @@ package com.projeto.tccv1.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.projeto.tccv1.model.entity.Paciente;
 import com.projeto.tccv1.model.entity.ResultadoExame;
 
 public interface ResultadoExameService {
@@ -11,5 +12,5 @@ public interface ResultadoExameService {
 	void deletar(ResultadoExame resultado);
 	List<ResultadoExame> buscarTodos();
 	Optional<ResultadoExame> buscarPorId(Long idResultado);
-
+	List<ResultadoExame>buscarPorPaciente(Paciente paciente);
 }
