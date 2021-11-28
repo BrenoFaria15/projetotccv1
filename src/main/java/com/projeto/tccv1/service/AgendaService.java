@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.projeto.tccv1.model.entity.Agenda;
+import com.projeto.tccv1.model.entity.Paciente;
 
 public interface AgendaService {
 	 Optional<Agenda> buscarPorId(Long idAgenda);
@@ -13,6 +14,7 @@ public interface AgendaService {
 	 void deletar(Agenda agenda);
 	 List<Agenda>buscarPorData(LocalDate data);
 	 void atualizarPresenca(Agenda agenda);
+	 List<Agenda>buscarPorPaciente(Paciente paciente);
 	 
 
 }

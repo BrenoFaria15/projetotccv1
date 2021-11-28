@@ -113,22 +113,23 @@ public class AtendimentoContoller {
 			dataConvertida =  LocalDate.parse(data);
 			atendimentoFiltro.setData(dataConvertida);
 		
-//if(paciente!=NULL){}
+        if(idPaciente!= 0){
 		Optional<Paciente>paciente = pacienteService.buscarPorId(idPaciente);
 		if(!paciente.isPresent()) {
 			return ResponseEntity.badRequest().body("Paciente com esse id não encontrado");
 		}else {
 			atendimentoFiltro.setPaciente(paciente.get());
 		}
-	
+        }
 		
+        if(idProfissional!= 0){
 		Optional<Profissional>profissional = profissionalService.buscarPorId(idProfissional);
 		if(!profissional.isPresent()) {
 			return ResponseEntity.badRequest().body("Profissional com esse id não encontrado");
 		}else {
 			atendimentoFiltro.setProfissional(profissional.get());
 		}
-		
+        }
 		
 		List<Atendimento> atendimentos= service.buscar(atendimentoFiltro);
 		return ResponseEntity.ok(atendimentos);
@@ -154,9 +155,10 @@ public class AtendimentoContoller {
 	
 	@GetMapping("/buscaratendimentos")
 	public @ResponseBody List<Atendimento> buscarAtendimentos(
-			@RequestParam(value="data",required = false)String data,						
-			 @RequestParam(value="idPaciente")Long idPaciente,
-			 @RequestParam(value="idProfissional",required = false)Long idProfissional) throws ParseException{
+			@RequestParam(value="data")String data,						
+			 @RequestParam(value="idPaciente",required = false)Long idPaciente,
+			@RequestParam(value="idProfissional",required = false)Long idProfissional,
+			@RequestParam(value="idUnidade",required = false)Long idUnidade) throws ParseException{
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		
 		
@@ -171,7 +173,8 @@ public class AtendimentoContoller {
 		
 		Paciente pacienteFiltro = pacienteService.buscarPorId(idPaciente).get();
 		Profissional profissionalFiltro =profissionalService.buscarPorId(idProfissional).get();
-		return service.buscarAtendimento(pacienteFiltro, profissionalFiltro,dataConvertida);
+		Unidade unidadeFiltro = unidadeService.buscarPorId(idUnidade).get();
+		return service.buscarAtendimento(pacienteFiltro, profissionalFiltro,dataConvertida,unidadeFiltro);
 	}
 	
 	@GetMapping("/buscarporid/{id}")

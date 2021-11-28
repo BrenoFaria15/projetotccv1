@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projeto.tccv1.model.entity.Agenda;
+import com.projeto.tccv1.model.entity.Paciente;
 import com.projeto.tccv1.model.repository.AgendaRepository;
 import com.projeto.tccv1.service.AgendaService;
 
@@ -69,6 +70,13 @@ public class AgendaServiceImpl implements AgendaService{
 	public void atualizarPresenca(Agenda agenda) {
 				atualizar(agenda);
 		
+	}
+
+
+	@Override
+	public List<Agenda> buscarPorPaciente(Paciente paciente) {
+		
+		return repository.findByPaciente(paciente);
 	}
 
 }

@@ -9,11 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.projeto.tccv1.model.entity.Atendimento;
 import com.projeto.tccv1.model.entity.Paciente;
 import com.projeto.tccv1.model.entity.Profissional;
+import com.projeto.tccv1.model.entity.Unidade;
 
 public interface AtendimentoRepository extends JpaRepository<Atendimento,Long> {
 	
 	List<Atendimento>findByPaciente(Paciente paciente);
 	
-	List<Atendimento>findByPacienteAndProfissionalAndData(Paciente paciente,Profissional profissional,LocalDate data);
+	List<Atendimento>findByPacienteAndProfissionalAndDataAndUnidade(Paciente paciente,Profissional profissional,LocalDate data,Unidade unidade);
 
 }

@@ -95,6 +95,14 @@ public class AgendaController {
 		return service.buscarPorData(dataConvertida);
 	}
 	
+
+
+	@GetMapping("/buscarporpaciente/{id}")
+	public @ResponseBody List<Agenda> buscarPaciente(@PathVariable("id")String id){
+		long idInt = Integer.parseInt(id);
+		Paciente pacienteFiltro = pacienteService.buscarPorId(idInt).get();
+		return service.buscarPorPaciente(pacienteFiltro);
+	}
 	
 	
 	@DeleteMapping("{id}")

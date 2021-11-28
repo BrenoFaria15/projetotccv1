@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.projeto.tccv1.model.entity.Atendimento;
 import com.projeto.tccv1.model.entity.Paciente;
 import com.projeto.tccv1.model.entity.Profissional;
+import com.projeto.tccv1.model.entity.Unidade;
 import com.projeto.tccv1.model.repository.AtendimentoRepository;
 import com.projeto.tccv1.service.AtendimentoService;
 
@@ -73,9 +74,11 @@ public class AtendimentoServiceImpl implements AtendimentoService{
 	}
 
 	@Override
-	public List<Atendimento> buscarAtendimento(Paciente paciente, Profissional profissional, LocalDate data) {
-		
-		return repository.findByPacienteAndProfissionalAndData(paciente, profissional, data);
+	public List<Atendimento> buscarAtendimento(Paciente paciente, Profissional profissional, LocalDate data,
+			Unidade unidade) {
+		return repository.findByPacienteAndProfissionalAndDataAndUnidade(paciente, profissional, data,unidade);
 	}
+
+	
 
 }

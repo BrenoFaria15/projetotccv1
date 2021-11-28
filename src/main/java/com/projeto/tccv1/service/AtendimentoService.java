@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.projeto.tccv1.model.entity.Atendimento;
 import com.projeto.tccv1.model.entity.Paciente;
 import com.projeto.tccv1.model.entity.Profissional;
+import com.projeto.tccv1.model.entity.Unidade;
 
 public interface AtendimentoService {
 	Atendimento  salvar(Atendimento atendimento);
@@ -16,6 +17,6 @@ public interface AtendimentoService {
 	List<Atendimento> buscar(Atendimento AtendimentoFiltro);
 	Optional<Atendimento> buscarPorId(Long idAtendimento);
 	List<Atendimento> buscarPaciente(Paciente paciente);
-	List<Atendimento> buscarAtendimento(Paciente paciente,Profissional profissional,LocalDate data);
+	List<Atendimento> buscarAtendimento(Paciente paciente,Profissional profissional,LocalDate data,Unidade unidade);
 
 }
