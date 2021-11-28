@@ -90,16 +90,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-<repositories>
-    <repository>
-        <id>jasperreports</id>
-        <url>http://jasperreports.sourceforge.net/maven2</url>
-    </repository>
-    <repository>
-        <id>jaspersoft-third-party</id>
-        <url>https://jaspersoft.jfrog.io/ui/native/third-party-ce-artifacts</url>
-    </repository>
-</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
