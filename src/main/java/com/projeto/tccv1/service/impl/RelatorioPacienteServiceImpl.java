@@ -26,7 +26,7 @@ import net.sf.jasperreports.engine.JasperReport;
 @Service
 public class RelatorioPacienteServiceImpl implements RelatorioPacienteService {
 
-	@Value("classpath:Reports/relatorio-paciente.jrxml")
+	@Value("classpath:Reports/pacientes-listagem.jrxml")
 	private Resource relatorioPaciente;
 	
 	@Autowired
