@@ -3,6 +3,7 @@
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import com.projeto.tccv1.api.dto.UsuarioDTO;
 import com.projeto.tccv1.exeception.ErroAutenticacao;
 import com.projeto.tccv1.exeception.RegraNegocioException;
 import com.projeto.tccv1.model.entity.Usuario;
+import com.projeto.tccv1.service.RelatorioUsuarioService;
 import com.projeto.tccv1.service.UsuarioService;
 
 @RestController
@@ -26,10 +28,12 @@ import com.projeto.tccv1.service.UsuarioService;
 public class UsuarioController {
 	
 	private UsuarioService service;
+	private RelatorioUsuarioService relatorioService;
 	
 	@Autowired
-	public void UsuarioResource(UsuarioService service) {
+	public void UsuarioResource(UsuarioService service,RelatorioUsuarioService relatorioService) {
 		this.service = service;
+		this.relatorioService= relatorioService;
 	}
 	
 	@PostMapping("/autenticar")
@@ -105,6 +109,19 @@ public class UsuarioController {
 			service.deletar(entity);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}).orElseGet(() ->  new ResponseEntity("Usuario não encontrado", HttpStatus.BAD_REQUEST)); 
+	}
+	
+	@GetMapping("/relatorio-usuario")
+	public ResponseEntity<byte[]>relatorioUsuario(){
+		byte[] relatorioGerado = relatorioService.gerarRelatorio();
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "listagem-usuario.pdf";
+		
+		headers.setContentDispositionFormData("inline;filename=\""+fileName+"\"",fileName);
+		headers.setCacheControl("must-revalidate,post-check=0,pre-check=0");
+		return  new ResponseEntity<>(relatorioGerado,headers,HttpStatus.OK);
+		
+		
 	}
 	
 	

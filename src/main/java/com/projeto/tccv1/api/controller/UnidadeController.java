@@ -3,6 +3,7 @@ package com.projeto.tccv1.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projeto.tccv1.api.dto.UnidadeDTO;
 import com.projeto.tccv1.exeception.RegraNegocioException;
 import com.projeto.tccv1.model.entity.Unidade;
+import com.projeto.tccv1.service.RelatorioUnidadeService;
 import com.projeto.tccv1.service.UnidadeService;
 
 @RestController
@@ -25,10 +27,12 @@ import com.projeto.tccv1.service.UnidadeService;
 public class UnidadeController {
 	
 	private UnidadeService service;
+	private RelatorioUnidadeService relatorioService;
 	
 	@Autowired
-	public void UnidadeResource(UnidadeService service) {
+	public void UnidadeResource(UnidadeService service,RelatorioUnidadeService relatorioService) {
 		this.service=service;
+		this.relatorioService=relatorioService;
 	}
 	
 	@PostMapping
@@ -105,6 +109,20 @@ public class UnidadeController {
 			}
 			
 		}).orElseGet(() -> new ResponseEntity("Unidade não encontrada", HttpStatus.BAD_REQUEST));
+	}
+	
+
+@GetMapping("/relatorio-unidade")
+	public ResponseEntity<byte[]>relatorioUnidade(){
+		byte[] relatorioGerado = relatorioService.gerarRelatorio();
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "listagem-unidade.pdf";
+		
+		headers.setContentDispositionFormData("inline;filename=\""+fileName+"\"",fileName);
+		headers.setCacheControl("must-revalidate,post-check=0,pre-check=0");
+		return  new ResponseEntity<>(relatorioGerado,headers,HttpStatus.OK);
+		
+		
 	}
 	
 }

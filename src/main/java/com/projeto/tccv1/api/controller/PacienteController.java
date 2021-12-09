@@ -155,7 +155,7 @@ public ResponseEntity  buscarporCns(@RequestParam("cns")String cns){
 	public ResponseEntity<byte[]>relatorioPaciente(){
 		byte[] relatorioGerado = relatorioService.gerarRelatorio();
 		HttpHeaders headers = new HttpHeaders();
-		String fileName = "relatorio-paciente.pdf";
+		String fileName = "listagem-paciente.pdf";
 		
 		headers.setContentDispositionFormData("inline;filename=\""+fileName+"\"",fileName);
 		headers.setCacheControl("must-revalidate,post-check=0,pre-check=0");

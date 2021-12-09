@@ -18,5 +18,8 @@ public interface AtendimentoService {
 	Optional<Atendimento> buscarPorId(Long idAtendimento);
 	List<Atendimento> buscarPaciente(Paciente paciente);
 	List<Atendimento> buscarAtendimento(Paciente paciente,Profissional profissional,LocalDate data,Unidade unidade);
-
+	List<Atendimento> buscarAtendimentoPaciente(Paciente paciente,LocalDate data,Unidade unidade);
+	List<Atendimento> buscarAtendimentoData(LocalDate data,Unidade unidade);
+	List<Atendimento> buscarAtendimentoProfissional(Profissional profissional,LocalDate data,Unidade unidade);
+	
 }

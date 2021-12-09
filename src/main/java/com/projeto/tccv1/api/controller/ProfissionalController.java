@@ -3,6 +3,7 @@ package com.projeto.tccv1.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,16 +20,19 @@ import com.projeto.tccv1.api.dto.ProfissionalDTO;
 import com.projeto.tccv1.exeception.RegraNegocioException;
 import com.projeto.tccv1.model.entity.Profissional;
 import com.projeto.tccv1.service.ProfissionalService;
+import com.projeto.tccv1.service.RelatorioProfissionalService;
 
 @RestController
 @RequestMapping("/api/profissionais")
 public class ProfissionalController {
 	
 	private ProfissionalService service;
+	private RelatorioProfissionalService relatorioService;
 	
 	@Autowired
-	public void ProfissionalResource(ProfissionalService service) {
+	public void ProfissionalResource(ProfissionalService service,RelatorioProfissionalService relatorioService) {
 		this.service=service;
+		this.relatorioService=relatorioService;
 	}
 	
 	@PostMapping
@@ -128,6 +132,19 @@ public class ProfissionalController {
 		
 				
 				).orElseGet(() -> new ResponseEntity("Profissional não encontrado", HttpStatus.BAD_REQUEST));
+	}
+	
+	@GetMapping("/relatorio-profissional")
+	public ResponseEntity<byte[]>relatorioProfissional(){
+		byte[] relatorioGerado = relatorioService.gerarRelatorio();
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "listagem-profissional.pdf";
+		
+		headers.setContentDispositionFormData("inline;filename=\""+fileName+"\"",fileName);
+		headers.setCacheControl("must-revalidate,post-check=0,pre-check=0");
+		return  new ResponseEntity<>(relatorioGerado,headers,HttpStatus.OK);
+		
+		
 	}
 
 

@@ -17,4 +17,9 @@ public interface AtendimentoRepository extends JpaRepository<Atendimento,Long> {
 	
 	List<Atendimento>findByPacienteAndProfissionalAndDataAndUnidade(Paciente paciente,Profissional profissional,LocalDate data,Unidade unidade);
 
+	
+	List<Atendimento>findByPacienteAndDataAndUnidade(Paciente paciente,LocalDate data,Unidade unidade);
+	List<Atendimento>findByDataAndUnidade(LocalDate data,Unidade unidade);
+	List<Atendimento>findByProfissionalAndDataAndUnidade(Profissional profissional,LocalDate data,Unidade unidade);
+	
 }

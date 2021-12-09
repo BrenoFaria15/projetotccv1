@@ -171,10 +171,23 @@ public class AtendimentoContoller {
 			
 		
 		
-		Paciente pacienteFiltro = pacienteService.buscarPorId(idPaciente).get();
-		Profissional profissionalFiltro =profissionalService.buscarPorId(idProfissional).get();
 		Unidade unidadeFiltro = unidadeService.buscarPorId(idUnidade).get();
-		return service.buscarAtendimento(pacienteFiltro, profissionalFiltro,dataConvertida,unidadeFiltro);
+		if(idPaciente != null && idProfissional==null) {
+
+			Paciente pacienteFiltro = pacienteService.buscarPorId(idPaciente).get();
+			
+			return service.buscarAtendimentoPaciente(pacienteFiltro, dataConvertida, unidadeFiltro);
+		}else if(idPaciente==null &&  idProfissional !=null){
+			Profissional profissionalFiltro =profissionalService.buscarPorId(idProfissional).get();
+			return service.buscarAtendimentoProfissional(profissionalFiltro, dataConvertida, unidadeFiltro);
+		}else if(idPaciente==null && idProfissional==null) {
+			return service.buscarAtendimentoData(dataConvertida, unidadeFiltro);
+		}else {
+			Paciente pacienteFiltro = pacienteService.buscarPorId(idPaciente).get();
+			Profissional profissionalFiltro =profissionalService.buscarPorId(idProfissional).get();
+			return service.buscarAtendimento(pacienteFiltro, profissionalFiltro,dataConvertida,unidadeFiltro);
+		}
+		
 	}
 	
 	@GetMapping("/buscarporid/{id}")

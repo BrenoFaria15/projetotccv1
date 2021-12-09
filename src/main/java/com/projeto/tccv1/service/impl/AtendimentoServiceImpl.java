@@ -79,6 +79,24 @@ public class AtendimentoServiceImpl implements AtendimentoService{
 		return repository.findByPacienteAndProfissionalAndDataAndUnidade(paciente, profissional, data,unidade);
 	}
 
+	@Override
+	public List<Atendimento> buscarAtendimentoPaciente(Paciente paciente, LocalDate data, Unidade unidade) {
+		
+		return repository.findByPacienteAndDataAndUnidade(paciente, data, unidade);
+	}
+
+	@Override
+	public List<Atendimento> buscarAtendimentoData(LocalDate data, Unidade unidade) {
+		
+		return repository.findByDataAndUnidade(data, unidade);
+	}
+
+	@Override
+	public List<Atendimento> buscarAtendimentoProfissional(Profissional profissional, LocalDate data, Unidade unidade) {
+		
+		return repository.findByProfissionalAndDataAndUnidade(profissional, data, unidade);
+	}
+
 	
 
 }

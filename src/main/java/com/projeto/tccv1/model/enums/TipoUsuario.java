@@ -4,5 +4,6 @@ public enum TipoUsuario {
 
 	ENFERMEIRO,
 	MEDICO,
-	RECEPCAO
+	RECEPCAO,
+	GESTAO
 }
