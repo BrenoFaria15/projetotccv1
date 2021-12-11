@@ -3,6 +3,7 @@ package com.projeto.tccv1.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +20,7 @@ import com.projeto.tccv1.api.dto.ExameDTO;
 import com.projeto.tccv1.exeception.RegraNegocioException;
 import com.projeto.tccv1.model.entity.Exame;
 import com.projeto.tccv1.service.ExameService;
+import com.projeto.tccv1.service.RelatorioExameService;
 
 
 
@@ -26,10 +28,12 @@ import com.projeto.tccv1.service.ExameService;
 @RequestMapping("/api/exames")
 public class ExameController {
 	private ExameService service;
+	private RelatorioExameService relatorioService;
 	
 	@Autowired
-	public void ExameResource(ExameService service) {
+	public void ExameResource(ExameService service, RelatorioExameService relatorioService) {
 		this.service=service;
+		this.relatorioService=relatorioService;
 	}
 	
 
@@ -105,5 +109,18 @@ public ResponseEntity  buscarporId(@PathVariable("id")Long id){
 			
 			).orElseGet(() -> new ResponseEntity("Exame não encontrado", HttpStatus.BAD_REQUEST));
 }
+
+@GetMapping("/relatorio-exame")
+	public ResponseEntity<byte[]>relatorioUnidade(){
+		byte[] relatorioGerado = relatorioService.gerarRelatorio();
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "listagem-exame.pdf";
+		
+		headers.setContentDispositionFormData("inline;filename=\""+fileName+"\"",fileName);
+		headers.setCacheControl("must-revalidate,post-check=0,pre-check=0");
+		return  new ResponseEntity<>(relatorioGerado,headers,HttpStatus.OK);
+		
+		
+	}
 	
 }

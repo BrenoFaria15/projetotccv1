@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,6 +36,7 @@ import com.projeto.tccv1.service.AgendaService;
 import com.projeto.tccv1.service.AtendimentoService;
 import com.projeto.tccv1.service.PacienteService;
 import com.projeto.tccv1.service.ProfissionalService;
+import com.projeto.tccv1.service.RelatorioAtendimentoService;
 import com.projeto.tccv1.service.TipoAtendimentoService;
 import com.projeto.tccv1.service.UnidadeService;
 import com.projeto.tccv1.service.UsuarioService;
@@ -53,6 +55,7 @@ public class AtendimentoContoller {
 	private  final TipoAtendimentoService tipoAtendService;
 	private  final UnidadeService unidadeService;
 	private final UsuarioService usuarioService;
+	private final RelatorioAtendimentoService relatorioService;
 	
 	
 	
@@ -201,7 +204,29 @@ public class AtendimentoContoller {
 				).orElseGet(() -> new ResponseEntity("Atendimento não encontrado", HttpStatus.BAD_REQUEST));
 	}
 	
-	
+	@GetMapping("/relatorio-atendimento")
+	public ResponseEntity<byte[]>relatorioAtendimento(@RequestParam(value = "dataInicio", required = false, defaultValue = "") String inicio,
+			@RequestParam(value = "dataFim", required= false, defaultValue = "") String fim,
+			@RequestParam(value = "idPaciente", required= false, defaultValue = "") Long idPaciente,
+			@RequestParam(value = "idProfissional", required= false, defaultValue = "") Long idProfissional) throws ParseException{
+		
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+		java.util.Date dataInicio,dataFim;
+		
+		dataInicio = formato.parse(inicio);
+		dataFim = formato.parse(fim);
+		
+		byte[] relatorioGerado = relatorioService.gerarRelatorio(idPaciente,idProfissional,dataInicio,dataFim);
+		
+		HttpHeaders headers = new HttpHeaders();
+		String fileName = "listagem-atendimentos.pdf";
+		
+		headers.setContentDispositionFormData("inline;filename=\""+fileName+"\"",fileName);
+		headers.setCacheControl("must-revalidate,post-check=0,pre-check=0");
+		return  new ResponseEntity<>(relatorioGerado,headers,HttpStatus.OK);
+		
+		
+	}
 	
 	
 	

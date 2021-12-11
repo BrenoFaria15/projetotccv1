@@ -41,31 +41,31 @@ public class Atendimento {
 	private long id_atendimento;
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="id_profissional")
 	private Profissional profissional;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="id_unidade")
 	private Unidade unidade;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="id_paciente")
 	private Paciente paciente;
 	
 	@Column(name="flg_atendido")
 	private boolean flg_atendido;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="id_tipo_atendimento")
 	private TipoAtendimento tipoatendimento;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="id_agenda")
 	private Agenda agenda;
 	
