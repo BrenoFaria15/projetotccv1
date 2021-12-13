@@ -114,6 +114,12 @@ public class ProfissionalController {
 		return service.buscarTodos();
 	}
 	
+	@GetMapping("/allfiltro")
+	public @ResponseBody List<Profissional> buscarTodosFiltro(){
+		return service.buscarTodosFiltro();
+	}
+	
+	
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity deletar(@PathVariable("id")Long id) {

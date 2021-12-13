@@ -126,6 +126,12 @@ public class PacienteController {
 		return service.buscarTodos();
 	}
 	
+	
+	@GetMapping("/allfiltro")
+	public @ResponseBody List<Paciente> buscarTodosFiltro(){
+		return service.buscarTodosFiltro();
+	}
+	
 
 	
 

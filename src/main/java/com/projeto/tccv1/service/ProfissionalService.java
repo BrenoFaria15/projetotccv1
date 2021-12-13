@@ -15,5 +15,6 @@ public interface ProfissionalService {
 	Profissional atualizar(Profissional profissional);
 	void deletar(Profissional profissional);
 	List<Profissional>buscarTodos();
+	List<Profissional> buscarTodosFiltro();
 }
 

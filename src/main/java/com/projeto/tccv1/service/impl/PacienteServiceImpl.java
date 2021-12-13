@@ -126,4 +126,12 @@ public class PacienteServiceImpl implements PacienteService {
 		return repository.findByCns(cns);
 	}
 
+
+
+	@Override
+	public List<Paciente> buscarTodosFiltro() {
+		
+		return repository.findByFlgAtivoTrueAndFlgObitoFalse();
+	}
+
 }

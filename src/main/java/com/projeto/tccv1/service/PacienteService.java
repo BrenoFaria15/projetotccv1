@@ -17,4 +17,5 @@ public interface PacienteService {
 	Paciente atualizar(Paciente paciente);
 	void deletar(Paciente paciente);
 	List<Paciente> buscarTodos();
+	List<Paciente> buscarTodosFiltro();
 }

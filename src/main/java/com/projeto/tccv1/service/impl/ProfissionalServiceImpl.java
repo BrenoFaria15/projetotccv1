@@ -94,4 +94,11 @@ public class ProfissionalServiceImpl implements ProfissionalService{
 		return repository.findAll();
 	}
 
+
+	@Override
+	public List<Profissional> buscarTodosFiltro() {
+		
+		return repository.findByFlgAtivoTrue();
+	}
+
 }
