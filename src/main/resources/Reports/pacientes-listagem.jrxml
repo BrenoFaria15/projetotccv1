@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2021-11-29T10:42:15 -->
+<!-- 2021-12-18T18:28:01 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pacientes-listagem" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b1097cc-174b-4693-bb7a-59e8cefeaefc">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="banco-de-dados-protuarioweb.xml"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<queryString>
-		<![CDATA[select * from paciente ]]>
+		<![CDATA[select * from paciente]]>
 	</queryString>
 	<field name="id_paciente" class="java.lang.Long"/>
 	<field name="bairro" class="java.lang.String"/>
@@ -214,7 +214,7 @@
 				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="452" y="24" width="103" height="15" printWhenGroupChanges="Group4" uuid="4f461ca0-e527-4a0a-a352-a882b70f871f"/>
+				<reportElement x="452" y="24" width="103" height="16" printWhenGroupChanges="Group4" uuid="4f461ca0-e527-4a0a-a352-a882b70f871f"/>
 				<box>
 					<rightPen lineWidth="1.0"/>
 				</box>

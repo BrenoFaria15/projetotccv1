@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
-<!-- 2021-12-11T17:25:07 -->
+<!-- 2021-12-18T18:28:01 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pacientes-listagem" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b1097cc-174b-4693-bb7a-59e8cefeaefc">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="banco-de-dados-protuarioweb.xml"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -15,8 +15,7 @@ inner join profissional pr on a.id_profissional=pr.id_profissional
 inner join tipo_atendimento ta on a.id_tipo_atendimento=ta.id_tipo_atendimento
 where a.data between  $P{DATA_INICIO} and $P{DATA_FIM}
 and ( a.id_paciente=$P{ID_PACIENTE}  or  $P{ID_PACIENTE}  is null )
-and ( a.id_profissional=$P{ID_PROFISSIONAL} or  $P{ID_PROFISSIONAL}  is null )
-]]>
+and ( a.id_profissional=$P{ID_PROFISSIONAL} or  $P{ID_PROFISSIONAL}  is null )]]>
 	</queryString>
 	<field name="nome" class="java.lang.String"/>
 	<field name="nomeprofissional" class="java.lang.String"/>
@@ -132,10 +131,6 @@ and ( a.id_profissional=$P{ID_PROFISSIONAL} or  $P{ID_PROFISSIONAL}  is null )
 			<line>
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="30cb57f5-23be-4081-a343-52eb0470a991"/>
 			</line>
-			<staticText>
-				<reportElement x="27" y="0" width="100" height="30" uuid="e8960219-1014-4c19-a976-b543a2469751"/>
-				<text><![CDATA[nome]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -153,7 +148,7 @@ and ( a.id_profissional=$P{ID_PROFISSIONAL} or  $P{ID_PROFISSIONAL}  is null )
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="3" width="116" height="18" uuid="aff4a203-c985-4087-bd88-2d045499ea73"/>
+				<reportElement x="110" y="4" width="116" height="18" uuid="aff4a203-c985-4087-bd88-2d045499ea73"/>
 				<box>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -177,7 +172,7 @@ and ( a.id_profissional=$P{ID_PROFISSIONAL} or  $P{ID_PROFISSIONAL}  is null )
 				<textFieldExpression><![CDATA[$F{hora_inicio}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-				<reportElement x="430" y="3" width="124" height="16" uuid="bd3834e5-ce8d-4a73-9b14-c560726a3292"/>
+				<reportElement x="430" y="3" width="124" height="20" uuid="bd3834e5-ce8d-4a73-9b14-c560726a3292"/>
 				<box>
 					<rightPen lineWidth="1.0"/>
 				</box>
